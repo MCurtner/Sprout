@@ -15,6 +15,8 @@
 		BAEA47C51F52E13600652271 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAEA47C31F52E13600652271 /* Main.storyboard */; };
 		BAEA47C71F52E13600652271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAEA47C61F52E13600652271 /* Assets.xcassets */; };
 		BAEA47CA1F52E13600652271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAEA47C81F52E13600652271 /* LaunchScreen.storyboard */; };
+		BAEA47D51F52E20400652271 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA47D41F52E20400652271 /* Player.swift */; };
+		BAEA47D71F52E4BC00652271 /* Drops.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA47D61F52E4BC00652271 /* Drops.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		BAEA47C61F52E13600652271 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BAEA47C91F52E13600652271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BAEA47CB1F52E13600652271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAEA47D41F52E20400652271 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		BAEA47D61F52E4BC00652271 /* Drops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drops.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				BAEA47BB1F52E13600652271 /* GameScene.sks */,
 				BAEA47BD1F52E13600652271 /* Actions.sks */,
 				BAEA47BF1F52E13600652271 /* GameScene.swift */,
+				BAEA47D41F52E20400652271 /* Player.swift */,
+				BAEA47D61F52E4BC00652271 /* Drops.swift */,
 				BAEA47C11F52E13600652271 /* GameViewController.swift */,
 				BAEA47C31F52E13600652271 /* Main.storyboard */,
 				BAEA47C61F52E13600652271 /* Assets.xcassets */,
@@ -147,9 +153,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAEA47D51F52E20400652271 /* Player.swift in Sources */,
 				BAEA47C01F52E13600652271 /* GameScene.swift in Sources */,
 				BAEA47C21F52E13600652271 /* GameViewController.swift in Sources */,
 				BAEA47BA1F52E13600652271 /* AppDelegate.swift in Sources */,
+				BAEA47D71F52E4BC00652271 /* Drops.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +297,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M77G4VQ69B;
 				INFOPLIST_FILE = Sprout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.matthewcurtner.Sprout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -304,6 +313,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M77G4VQ69B;
 				INFOPLIST_FILE = Sprout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.matthewcurtner.Sprout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
