@@ -8,6 +8,11 @@
 
 import SpriteKit
 
+/// Enum for types of allowed water drops
+///
+/// - small: The smallest and desired type
+/// - medium: Small damage
+/// - large: Heavy damage
 enum Waterdrop: Int {
     case small
     case medium
@@ -16,7 +21,11 @@ enum Waterdrop: Int {
 
 extension GameScene {
     
-    func createDrop(type: Waterdrop) {
+    /// Creates the correct water drop sprite and physicsbody
+    /// based on the passed in water type.
+    ///
+    /// - Parameter type: Waterdrop type
+    func createDrop(Waterdrop type: Waterdrop) {
         let drop = SKSpriteNode(imageNamed: "drop")
         drop.name = "waterdrop"
         
@@ -32,9 +41,9 @@ extension GameScene {
         drop.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         drop.anchorPoint = CGPoint(x: 0.5, y: 0.33)
         
+        // Physics
         drop.physicsBody = SKPhysicsBody(circleOfRadius: drop.size.height/4)
         drop.physicsBody = SKPhysicsBody(circleOfRadius: drop.size.height/4, center: drop.anchorPoint)
-        
         drop.physicsBody?.isDynamic = false
         
         self.addChild(drop)

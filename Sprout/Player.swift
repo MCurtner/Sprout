@@ -10,11 +10,12 @@ import SpriteKit
 
 extension GameScene {
     
+    /// Setup the player spritenode texture, physicsbody, and position
     func createPlayer() {
+        // Setup the plant texture
         let plantTexture = SKTexture(imageNamed: "plant")
-        let circlePlant = SKSpriteNode(texture: plantTexture)
-        circlePlant.physicsBody = SKPhysicsBody(circleOfRadius: max(circlePlant.size.width/2, circlePlant.size.height/2))
         
+        // Setup player spritenode
         player = SKSpriteNode(texture: plantTexture)
         player.position = CGPoint(x: self.size.width/2, y: ground.position.y + 200)
         player.name = "player"
@@ -31,6 +32,13 @@ extension GameScene {
         self.addChild(player)
     }
     
+    
+    /// Moves the player sprite either to the left or right
+    /// based on the buttons touched.  Does not allow double
+    /// jumping.
+    ///
+    /// - Parameter right: Check if right button was pressed,
+    /// otherwise executes the left button
     func movePlayerHorizonatally(right: Bool) {
         if ableToJump == true {
             ableToJump = false

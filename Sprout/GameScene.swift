@@ -11,6 +11,7 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    // MARK: - Variables
     var player: SKSpriteNode!
     var ground: SKSpriteNode!
     
@@ -23,17 +24,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let dropCategory:UInt32 = 0x1 << 3
     let sidesCategory: UInt32 = 0x1 << 4
     
+    // MARK: - Load view
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
         createBounds()
         createGround()
         createPlayer()
-        createDrop(type: .small)
+        createDrop(Waterdrop: .small)
     }
     
+    // MARK: - Update
     override func update(_ currentTime: TimeInterval) {
     }
     
+    /// MARK: Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let location = touch.previousLocation(in: self)
@@ -53,6 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var playerBody:SKPhysicsBody
         var otherBody:SKPhysicsBody
         
+        // Get the correct player bitmask
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             playerBody = contact.bodyA
             otherBody = contact.bodyB
@@ -61,17 +66,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             otherBody = contact.bodyA
         }
         
+        // If player is touching ground, set ableToJump to true
         if playerBody.categoryBitMask == playerCategory && otherBody.categoryBitMask == groundCategory {
             ableToJump = true
         }
     }
     
+    // MARK: - Setup
+    
+    /// Create the screen bounds to prevent the player from falling off screen
     func createBounds() {
         let boundry = SKPhysicsBody(edgeLoopFrom: self.frame)
         boundry.categoryBitMask = sidesCategory
         self.physicsBody = boundry
     }
     
+    /// Setup the ground SKSpriteNode with physicsbody values
     func createGround() {
         ground = SKSpriteNode(color: .brown, size: CGSize(width: self.size.width + 10, height: 15.0))
         ground.position = (self.childNode(withName: "ground")?.position)!
