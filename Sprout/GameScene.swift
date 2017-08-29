@@ -15,6 +15,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player: SKSpriteNode!
     var ground: SKSpriteNode!
     var drop: SKSpriteNode!
+    var cloud: SKSpriteNode!
     
     var ableToJump = true
     
@@ -29,12 +30,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: - Load view
     override func didMove(to view: SKView) {
-         print("points: \(points)")
         self.physicsWorld.contactDelegate = self
+        
+        // Create Game World
         createBounds()
         createGround()
+        createCloud()
         createPlayer()
-        createDrop(Waterdrop: .small)
+        createDrop()
     }
     
     // MARK: - Update
@@ -104,5 +107,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ground.physicsBody?.isDynamic = false
         self.addChild(ground)
     }
- 
+    
+    /// Create the Cloud Sprite
+    func createCloud() {
+        cloud = SKSpriteNode(imageNamed: "cloud")
+        cloud.position = CGPoint(x: 0, y: self.size.height - 20)
+        cloud.setScale(1.0)
+        cloud.zPosition = 2
+        self.addChild(cloud)
+        
+        // Animate the cloud's movement
+        animateCloud()
+    }
+    
+    /// Animate the cloud's movement from right to left
+    func animateCloud() {
+        let moveRight = SKAction.moveBy(x: self.size.width, y: 0, duration: 5)
+        let moveLeft = SKAction.moveBy(x: -self.size.width, y: 0, duration: 5)
+        let repeatAction = SKAction.repeatForever(SKAction.sequence([moveRight, moveLeft]))
+        cloud.run(repeatAction)
+    }
 }

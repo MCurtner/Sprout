@@ -8,40 +8,19 @@
 
 import SpriteKit
 
-/// Enum for types of allowed water drops
-///
-/// - small: The smallest and desired type
-/// - medium: Small damage
-/// - large: Heavy damage
-enum Waterdrop: Int {
-    case small
-    case medium
-    case large
-}
-
 extension GameScene {
     
     /// Creates the correct water drop sprite and physicsbody
     /// based on the passed in water type.
     ///
     /// - Parameter type: Waterdrop type
-    func createDrop(Waterdrop type: Waterdrop) {
+    func createDrop() {
         drop = SKSpriteNode(imageNamed: "drop")
         drop.name = "waterdrop"
+        drop.setScale(0.5)
         
-        switch type {
-        case .small:
-            drop.setScale(0.5)
-        case .medium:
-            drop.setScale(1.0)
-        case .large:
-            drop.setScale(2.0)
-        }
-        
-        // Create a random point on the screen's x-axis
-        let randomPoint = CGFloat(arc4random_uniform(UInt32(self.size.width)))
-    
-        drop.position = CGPoint(x: randomPoint, y: self.size.height/2)
+        // Set the drop position as the clouds position
+        drop.position = CGPoint(x: cloud.position.x, y: cloud.position.y - 5)
         drop.anchorPoint = CGPoint(x: 0.5, y: 0.33)
         
         // Physics
@@ -57,6 +36,6 @@ extension GameScene {
     func removeDrop() {
         drop.removeAllActions()
         drop.removeFromParent()
-        createDrop(Waterdrop: .small)
+        createDrop()
     }
 }

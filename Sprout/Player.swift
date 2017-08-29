@@ -19,7 +19,7 @@ extension GameScene {
         player = SKSpriteNode(texture: plantTexture)
         player.position = CGPoint(x: self.size.width/2, y: ground.position.y + 200)
         player.name = "player"
-        player.anchorPoint = CGPoint(x: 0.5, y: 0.4)
+        player.anchorPoint = CGPoint(x: 0.5, y: 0.3)
         
         // Physics
         player.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: player.size.width/2, height: player.size.height/3) , center: player.anchorPoint)
