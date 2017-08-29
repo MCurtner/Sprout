@@ -26,7 +26,7 @@ extension GameScene {
     ///
     /// - Parameter type: Waterdrop type
     func createDrop(Waterdrop type: Waterdrop) {
-        let drop = SKSpriteNode(imageNamed: "drop")
+        drop = SKSpriteNode(imageNamed: "drop")
         drop.name = "waterdrop"
         
         switch type {
@@ -38,14 +38,25 @@ extension GameScene {
             drop.setScale(2.0)
         }
         
-        drop.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        // Create a random point on the screen's x-axis
+        let randomPoint = CGFloat(arc4random_uniform(UInt32(self.size.width)))
+    
+        drop.position = CGPoint(x: randomPoint, y: self.size.height/2)
         drop.anchorPoint = CGPoint(x: 0.5, y: 0.33)
         
         // Physics
         drop.physicsBody = SKPhysicsBody(circleOfRadius: drop.size.height/4)
         drop.physicsBody = SKPhysicsBody(circleOfRadius: drop.size.height/4, center: drop.anchorPoint)
-        drop.physicsBody?.isDynamic = false
+        drop.physicsBody?.categoryBitMask = dropCategory
+        drop.physicsBody?.contactTestBitMask = playerCategory | groundCategory
         
         self.addChild(drop)
+    }
+    
+    /// Remove the rain drop and then create a new one
+    func removeDrop() {
+        drop.removeAllActions()
+        drop.removeFromParent()
+        createDrop(Waterdrop: .small)
     }
 }

@@ -14,18 +14,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Variables
     var player: SKSpriteNode!
     var ground: SKSpriteNode!
+    var drop: SKSpriteNode!
     
     var ableToJump = true
     
-    // MARK: Collision Categories
-    let playerCategory:UInt32 = 0x1 << 0
-    let groundCategory:UInt32 = 0x1 << 1
-    let enemyCategory:UInt32 = 0x1 << 2
-    let dropCategory:UInt32 = 0x1 << 3
+    var points: Int = 0
+    
+    // MARK: Bitmask Categories
+    let playerCategory: UInt32 = 0x1 << 0
+    let groundCategory: UInt32 = 0x1 << 1
+    let enemyCategory: UInt32 = 0x1 << 2
+    let dropCategory: UInt32 = 0x1 << 3
     let sidesCategory: UInt32 = 0x1 << 4
     
     // MARK: - Load view
     override func didMove(to view: SKView) {
+         print("points: \(points)")
         self.physicsWorld.contactDelegate = self
         createBounds()
         createGround()
@@ -69,6 +73,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // If player is touching ground, set ableToJump to true
         if playerBody.categoryBitMask == playerCategory && otherBody.categoryBitMask == groundCategory {
             ableToJump = true
+        }
+        
+        if playerBody.categoryBitMask == playerCategory && otherBody.categoryBitMask == dropCategory {
+            points += 1
+            removeDrop()
+        }
+        
+        if playerBody.categoryBitMask == groundCategory && otherBody.categoryBitMask == dropCategory {
+            removeDrop()
         }
     }
     
